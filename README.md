@@ -47,7 +47,7 @@ Option B: Import ZIP into IDE
 
  -> Extract it
 
-Open Eclipse → File → Import → Maven → Existing Maven Projects
+Open Eclipse ? File ? Import ? Maven ? Existing Maven Projects
 
  3. Configure the Application (Important)
 
@@ -84,7 +84,7 @@ Option B: Run in Eclipse
 
 Right-click CodeEditorApplication
 
-Select Run As → Java Application
+Select Run As ? Java Application
 
 After building, check: target/editor-0.0.1-SNAPSHOT.jar
 
@@ -112,29 +112,29 @@ Expected Response:
 High-Level Architecture Diagram
               
       (1) REST API: Send code + cursor
-                           │
-               ┌───────────▼──────────────┐
-               │   Backend (Spring Boot)   │
-               │ ─ REST Controller         │
-               │ ─ GeminiService           │
-               │ ─ WebSocket for syncing   │
-               └───────────┬──────────────┘
-                           │
+                           ?
+               ????????????????????????????
+               ?   Backend (Spring Boot)   ?
+               ? ? REST Controller         ?
+               ? ? GeminiService           ?
+               ? ? WebSocket for syncing   ?
+               ????????????????????????????
+                           ?
       (2) HTTP request to Gemini AI API
-                           │
-               ┌───────────▼──────────────┐
-               │       Gemini API          │
-               │  Processes prompt + code  │
-               │  Returns suggestion text  │
-               └───────┬──────────────────┘
-                       │
+                           ?
+               ????????????????????????????
+               ?       Gemini API          ?
+               ?  Processes prompt + code  ?
+               ?  Returns suggestion text  ?
+               ????????????????????????????
+                       ?
        (3) Send AI suggestions back
-                       │
-              ┌────────▼──────────┐
-              │  Frontend Editor  │
-              │ Shows completion  │
-              └────────────────────┘
-2️.Backend (Java Spring Boot): 
+                       ?
+              ?????????????????????
+              ?  Frontend Editor  ?
+              ? Shows completion  ?
+              ??????????????????????
+2?.Backend (Java Spring Boot): 
 
 The backend acts as a bridge between the frontend and Google Gemini API.
 
@@ -144,17 +144,17 @@ Responsibilities:
 - Accept code + cursor position
  - Format the prompt for Gemini
 - Call Gemini API
-- Parse Gemini’s response
+- Parse Gemini�s response
 - Return a clean suggestion to frontend
 - Provide WebSocket communication for real-time collaboration
 
-Backend Functional Flow:  Frontend → POST /api/complete → Backend → Gemini API → Backend → Frontend
+Backend Functional Flow:  Frontend ? POST /api/complete ? Backend ? Gemini API ? Backend ? Frontend
 
 Key backend classes:
-CompletionController → Receives request from frontend
-CompletionRequest → Holds code + cursor
-GeminiService → Calls Gemini API
-CompletionResponse → Sends processed suggestion back
+CompletionController ? Receives request from frontend
+CompletionRequest ? Holds code + cursor
+GeminiService ? Calls Gemini API
+CompletionResponse ? Sends processed suggestion back
 
 The frontend sends:
 
@@ -163,17 +163,17 @@ The frontend sends:
   "cursor": 16
 }
 
-Step 2 — Backend receives    --/api/complete
+Step 2 � Backend receives    --/api/complete
 
 Backend forwards a formatted AI request to Gemini API.
 
-Step 3 — Gemini generates suggestion
+Step 3 � Gemini generates suggestion
 
 Example response:
 
 "Consider adding a parameter to improve flexibility..."
 
-Step 4 — Backend maps response
+Step 4 � Backend maps response
 
 Backend sends this to frontend as:
 
